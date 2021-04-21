@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>The BroadCast</title>
+</head>
+
+<body>
+<nav class="navbar">
+    <ul>
+        <li>
+            <a href="{{ url_for('home') }}" class="{% if home %}active{% endif %}">Home</a>
+        </li>
+        <li>
+            <a href="{{ url_for('news') }}" class="{% if news %}active{% endif %}">News</a>
+        </li>
+        <li>
+            <a href="{{ url_for('contact_us') }}" class="{% if contact_us %}active{% endif %}">Contact Us</a>
+        </li>
+        <li style="float: right">
+            <a href="{{ url_for('register') }}" class="{% if register %}active{% endif %}">Register</a>
+        </li>
+        {% if session.get('login') %}
+            <li style="float: right">
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </li>
+        {% else %}
+            <li style="float: right">
+                <a href="{{ url_for('login') }}" class="{% if login %}active{% endif %}">Login</a>
+            </li>
+        {% endif %}
+        <li style="float: right; padding-right: 25px; text-decoration: underline; font-weight: bold">
+            <p>Welcome! {{ session['username'] }}</p>
+        </li>
+    </ul>
+</nav>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                <p>{{ message }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

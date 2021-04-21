@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <br> <br> <br> <br> <br>
+    <form class="login" method="post" action="{{ url_for('login') }}">
+        <fieldset>
+            <legend>Login Form</legend>
+            <label for="email">Email</label> <br>
+            <input name="email" id="email" type="email" placeholder="abc@xyz.com" required> <br> <br>
+            <label for="password">Password</label> <br>
+            <input name="password" id="password" type="password" required> <br> <br>
+            <button name="login" type="submit">Login</button>
+            <br>
+        </fieldset>
+        <span>Don't have an account: <a href="{{ url_for('register') }}">Register Now</a></span>
+    </form>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <br> <br> <br> <br> <br>
+    {% if session['login'] %}
+        <form class="add-news" method="post" action="{{ url_for('add_news') }}">
+            <fieldset>
+                <legend>Add News</legend>
+                <label for="headline">Heading</label>
+                <input name="headline" id="headline" type="text" placeholder="heading" required> <br> <br>
+                <label for="description">Description</label>
+                <textarea name="description" id="description" placeholder="description" required></textarea> <br> <br>
+                <label for="author_name">Author Name</label>
+                <input name="author_name" id="author_name" type="text" placeholder="author name" required> <br> <br>
+                <label for="news_category">News Category</label>
+                <input name="news_category" id="news_category" type="text" placeholder="news category" required> <br>
+                <br>
+                <button name="add" type="submit">Add</button>
+            </fieldset>
+        </form>
+    {% else %}
+        <div class="alert alert-warning">
+            <p>You need to login to add news</p>
+        </div>
+    {% endif %}
+
+{% endblock %}

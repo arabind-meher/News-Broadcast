@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <fieldset style="border: none">
+        {% if news_data or news_data != [] %}
+            {% for news in news_data %}
+                <fieldset>
+                    <legend>{{ news[3] }}</legend>
+                    <article class="news">
+                        <h3 style="text-align: left">{{ news[0] }}</h3>
+                        <p>{{ news[1] }}</p>
+                        <h4 style="text-align: left">-- {{ news[2] }}</h4>
+                    </article>
+                </fieldset>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-warning">
+                <p>No news available</p>
+            </div>
+        {% endif %}
+    </fieldset> <br>
+    <a href="{{ url_for('add_news') }}">
+        <button name="add_news" type="button">Add News</button>
+    </a>
+{% endblock %}
